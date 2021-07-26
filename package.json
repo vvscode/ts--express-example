@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/vvscode/js--21-06-setup-env/issues"
   },
-  "homepage": "https://github.com/vvscode/js--21-06-setup-env#readme"
+  "homepage": "https://github.com/vvscode/js--21-06-setup-env#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
 }
