@@ -6,6 +6,9 @@ import './types'
 
 export const app = express();
 
+app.set('views', `${__dirname }/views`)
+app.set('view engine', 'ejs')
+
 app.use(json({}));
 
 app.use(session({
@@ -34,4 +37,8 @@ app.post('/personal_json', (req, res) => {
   res.send({
     count: req.session.counter
   });
+});
+
+app.get('/today', (req, res) => {
+  res.render('today', { today: new Date().toLocaleDateString() });
 });
