@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/vvscode/js--21-06-setup-env#readme",
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "ts-node": "^10.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",
