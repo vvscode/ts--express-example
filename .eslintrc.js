@@ -16,6 +16,7 @@ module.exports = {
       "error",
       {
         code: 120,
+        ignoreStrings: true,
         ignoreComments: true,
       },
     ],
