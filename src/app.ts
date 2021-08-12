@@ -4,6 +4,14 @@ import session from 'express-session';
 
 import './types'
 
+///
+import sqlite3 from 'sqlite3'
+
+const db = new sqlite3.Database(':memory:');
+db.run('CREATE TABLE visitors (ts INTEGER, agent TEXT)');
+// 
+
+
 export const app = express();
 
 app.set('views', `${__dirname }/views`)
@@ -41,4 +49,27 @@ app.post('/personal_json', (req, res) => {
 
 app.get('/today', (req, res) => {
   res.render('today', { today: new Date().toLocaleDateString() });
+});
+
+app.get('/dbcounter', (req, res) => {
+  db.run(`INSERT INTO visitors (ts, agent) 
+          VALUES  (?, ?)`, 
+          [Date.now() / 1000, req.headers['user-agent'] || 'Unknown'], 
+          (insertError) => {
+    if (insertError) {
+      res.status(404);
+      res.send({ status: 'error', err: insertError });
+      return;
+    }
+
+    db.get(`SELECT COUNT(*) AS count FROM visitors`, (selectCountError, row) => {
+      if (selectCountError) {
+        res.status(404);
+        res.send({ status: 'error', err: selectCountError });
+        return;
+      }
+      res.send({ status: 'ok', count: row.count });
+    });
+
+  });
 });
