@@ -1,3 +1,4 @@
+import './init';
 import { app } from './app';
 
 const port = 3000;

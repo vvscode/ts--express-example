@@ -1,2 +1,3 @@
 node_modules
 dbcounter.sqlite3
+.env

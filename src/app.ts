@@ -15,7 +15,9 @@ app.set('view engine', 'ejs')
 app.use(json({}));
 
 app.use(session({
-  secret:'Some secret here'
+  secret:'Some secret here',
+  resave: false,
+  saveUninitialized: false,
 }));
 
 let count = 0;
