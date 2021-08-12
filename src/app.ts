@@ -4,6 +4,7 @@ import session from 'express-session';
 import { dbRun, dbGet } from './sqlite3db';
 
 import './types'
+import {Visitor} from './mongodb';
 
 
 export const app = express();
@@ -54,6 +55,19 @@ app.get('/dbcounter', async (req, res) => {
     const row = await dbGet(`SELECT COUNT(*) AS count FROM visitors`) as {count: number};
     res.send({ status: 'ok', count: row.count });
   } catch(err) {
+    res.status(404);
+    res.send({ status: 'error', err });
+  }
+});
+
+app.get('/mongocounter', async (req, res) => {
+  try {
+    const visitor = new Visitor({ ts: Date.now() / 1000, agent: req.headers['user-agent'] || 'Unknown'});
+    await visitor.save();
+    const data = await Visitor.count();
+    res.send({ status: 'ok', count: data });
+
+  } catch (err) {
     res.status(404);
     res.send({ status: 'error', err });
   }
