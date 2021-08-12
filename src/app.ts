@@ -7,8 +7,8 @@ import './types'
 ///
 import sqlite3 from 'sqlite3'
 
-const db = new sqlite3.Database(':memory:');
-db.run('CREATE TABLE visitors (ts INTEGER, agent TEXT)');
+const db = new sqlite3.Database(`${__dirname}/../dbcounter.sqlite3`);
+db.run('CREATE TABLE IF NOT EXISTS visitors (ts INTEGER, agent TEXT)');
 // 
 
 
@@ -52,8 +52,7 @@ app.get('/today', (req, res) => {
 });
 
 app.get('/dbcounter', (req, res) => {
-  db.run(`INSERT INTO visitors (ts, agent) 
-          VALUES  (?, ?)`, 
+  db.run(`INSERT INTO visitors (ts, agent) VALUES  (?, ?)`, 
           [Date.now() / 1000, req.headers['user-agent'] || 'Unknown'], 
           (insertError) => {
     if (insertError) {
