@@ -23,7 +23,7 @@ app.use(session({
 let count = 0;
 
 app.get('/', (req, res) => {
-  res.send(`Hello World!`)
+  res.send(`Hello World! from heroku`)
 });
 
 app.post('/json', (req, res) => {
