@@ -2,6 +2,7 @@ import express from "express";
 import basicRouter from "./controllers/basicRoute";
 import session from "express-session"; 
 import booksRouter from "./controllers/booksRoute";
+import requestLogger from "./middleware";
 
 const app = express();
 
@@ -20,12 +21,12 @@ app.use(
 
 app.set("views", "./views");
 app.set("view engine", "pug");
-// app.use(requestLogger);
+app.use(requestLogger);
 
 app.use(express.static('public'));
 
-app.use('/api/books', booksRouter);
 app.use('/', basicRouter);
+app.use('/api/books', booksRouter);
 app.get("*", (req, res) => {
   res.status(404).render("404", { title: "My Template", message: "404. Not Found." });
 });

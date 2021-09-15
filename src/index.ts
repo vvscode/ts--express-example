@@ -1,7 +1,7 @@
 import app from './app';
 import mongoose from "mongoose";
 
-const port = process.env.PORT || 8081;
+const port = process.env.PORT || 8001;
 
 
 // НЕ СОХРАНЯЕМ ПАРОЛЬ НА GITHUB!

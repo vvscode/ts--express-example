@@ -1,12 +1,10 @@
 import express from 'express';
-import requestLogger from '../middleware';
 import '../types';
 
 const basicRouter = express.Router();
 
 basicRouter.get("/", (req, res) => {
   res.status(200).render("index", { title: "My Template", message: "Hello, Otus!" });
-  // res.status(200).render("index", { title: "My Template", message: `${num}` });
 });
 
 basicRouter.post("/users/:id", (req, res) => {

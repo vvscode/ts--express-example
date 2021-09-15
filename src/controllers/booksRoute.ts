@@ -1,7 +1,6 @@
 import express from 'express';
 import Book from '../models/books.model';
 
-
 const booksRouter = express.Router();
 
 booksRouter.get("/", (req, res) =>  {
