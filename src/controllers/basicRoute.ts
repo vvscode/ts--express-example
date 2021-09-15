@@ -28,8 +28,6 @@ basicRouter.get("/users/:id", (req, res) => {
   }
 });
 
-basicRouter.get("*", requestLogger, (req, res) => {
-  res.status(404).render("404", { title: "My Template", message: "404. Not Found." });
-});
+
 
 export default basicRouter;
