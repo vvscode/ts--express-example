@@ -10,6 +10,7 @@ basicRouter.get("/", (req, res) => {
 });
 
 basicRouter.post("/users/:id", (req, res) => {
+  console.log(req.body);
   if (req.params.id === '777') {
     req.session.isAdmin = true;
   } else {

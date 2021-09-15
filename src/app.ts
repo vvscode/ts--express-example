@@ -6,6 +6,7 @@ const app = express();
 
 const oneDay = 1000 * 60 * 60 * 24;
 
+app.use(express.json());
 // Подключение
 app.use(
   session({
