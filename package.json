@@ -24,7 +24,8 @@
   "homepage": "https://github.com/vvscode/js--21-06-setup-env#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "pug": "^3.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",

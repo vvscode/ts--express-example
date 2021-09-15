@@ -1,23 +1,22 @@
-import http from "http";
-import fs from 'fs';
+import express from "express";
+import { resolve } from 'path';
 
-const homePage = fs.readFileSync('./views/index.html');
-const pageNotFound = fs.readFileSync('./views/404.html');
-const programmerGif = fs.readFileSync('./public/programmer.gif');
+const app = express();
+const port = 8001;
 
-// Create a local server to receive data from
-const server = http.createServer((req, res) => {
-  if (req.url === '/') {
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.write(homePage);
-  } else if (req.url === '/public/programmer.gif') {
-    res.writeHead(200, { "Content-Type": "image/gif" });
-    res.write(programmerGif);
-  } else {
-    res.writeHead(404, { "Content-Type": "text/html" });
-    res.write(pageNotFound);    
-  }
-  res.end();
+app.set("views", "./views");
+app.set("view engine", "pug");
+
+app.use(express.static('public'));
+
+app.get("/", (req, res) => {
+  res.render("index", { title: "My Template", message: "Hello, Otus!" });
 });
 
-server.listen(8001);
+app.get("*", (req, res) => {
+  res.render("404", { title: "My Template", message: "Hello, Otus!" });
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
