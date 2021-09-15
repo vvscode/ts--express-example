@@ -26,7 +26,7 @@ app.use(express.static('public'));
 
 app.use('/api/books', booksRouter);
 app.use('/', basicRouter);
-basicRouter.get("*", (req, res) => {
+app.get("*", (req, res) => {
   res.status(404).render("404", { title: "My Template", message: "404. Not Found." });
 });
 

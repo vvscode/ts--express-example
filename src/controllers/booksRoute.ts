@@ -6,7 +6,6 @@ const booksRouter = express.Router();
 
 booksRouter.get("/", (req, res) =>  {
   Book.find({}).then((response) => {console.log(response); res.end(); }); 
-
 });
 
 booksRouter.post("/", (req, res) =>  {
