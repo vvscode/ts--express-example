@@ -1,22 +1,24 @@
-import express from "express";
-import { resolve } from 'path';
+import app from './app';
+import mongoose from "mongoose";
 
-const app = express();
 const port = 8001;
 
-app.set("views", "./views");
-app.set("view engine", "pug");
 
-app.use(express.static('public'));
+// НЕ СОХРАНЯЕМ ПАРОЛЬ НА GITHUB!
+const url =
+  "mongodb+srv://test-user:test@cluster0.ijexn.mongodb.net/test?retryWrites=true&w=majority";
 
-app.get("/", (req, res) => {
-  res.render("index", { title: "My Template", message: "Hello, Otus!" });
-});
-
-app.get("*", (req, res) => {
-  res.render("404", { title: "My Template", message: "Hello, Otus!" });
-});
+console.log("connecting to", url);
 
 app.listen(port, () => {
+  mongoose
+  .connect(url)
+  .then((result) => {
+    console.log("connected to MongoDB");
+  })
+  .catch((error) => {
+    console.log("error connecting to MongoDB:", error.message);
+  });
+
   console.log(`Example app listening at http://localhost:${port}`);
 });
